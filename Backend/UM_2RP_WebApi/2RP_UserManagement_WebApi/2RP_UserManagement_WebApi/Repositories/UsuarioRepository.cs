@@ -63,11 +63,11 @@ namespace _2RP_UserManagement_WebApi.Repositories
         public List<Usuario> ListarMinhas(int id)
         {
             return ctx.Usuarios
-                .Include(u => u.IdTipoUsuarioNavigation)
-                 .Include(u => u.Nome)
-                 .Include(u => u.Email)
-                 .Include(u => u.Senha)
-                 .Include(u => u.Status)
+                 .Include(u => u.IdTipoUsuarioNavigation)
+                 //.Include(u => u.Nome)
+                 //.Include(u => u.Email)
+                 //.Include(u => u.Senha)
+                 //.Include(u => u.Status)
                  .Where(u => u.IdUsuario == id).ToList();
         }
 
