@@ -64,10 +64,6 @@ namespace _2RP_UserManagement_WebApi.Repositories
         {
             return ctx.Usuarios
                  .Include(u => u.IdTipoUsuarioNavigation)
-                 //.Include(u => u.Nome)
-                 //.Include(u => u.Email)
-                 //.Include(u => u.Senha)
-                 //.Include(u => u.Status)
                  .Where(u => u.IdUsuario == id).ToList();
         }
 
