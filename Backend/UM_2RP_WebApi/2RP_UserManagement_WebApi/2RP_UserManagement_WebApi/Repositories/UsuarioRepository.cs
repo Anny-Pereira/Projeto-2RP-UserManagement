@@ -74,25 +74,7 @@ namespace _2RP_UserManagement_WebApi.Repositories
 
         public Usuario Login(string email, string senha)
         {
-            var usuario = ctx.Usuarios.FirstOrDefault(u => u.Email == email);
-
-            if (usuario != null)
-            {
-                if (usuario.Senha.Length < 32)
-                {
-                    usuario.Senha = Cripto.GerarHash(usuario.Senha);
-
-                    ctx.Usuarios.Update(usuario);
-                    ctx.SaveChanges();
-
-                }
-
-                bool comparado = Cripto.CompararSenha(senha, usuario.Senha);
-
-                if (comparado) return usuario;
-            }
-
-            return null;
+            return ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
     }
 }

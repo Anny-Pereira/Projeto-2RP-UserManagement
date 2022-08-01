@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "iLO0lrywn+g88Sw228xIMC8MszgYT4Ucmc6whJmS4FKrP4aBUO61gUXKmEiIlT4xKEUZw6odLDaWkJdqCoKofg==",
+  "dgSpecHash": "BGBPrBqaN+sD9TIasY3sjcU3nBf3xUIJ2/JbXlu/qIccIPfhiGiz5a3hrxMDHjrNLFX6OLg3OE+CkS9cynGTwA==",
   "success": true,
   "projectFilePath": "C:\\Users\\elilt\\OneDrive\\Área de Trabalho\\Processo-2RP\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\elilt\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\elilt\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\elilt\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.15\\microsoft.aspnetcore.authentication.jwtbearer.5.0.15.nupkg.sha512",
     "C:\\Users\\elilt\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.17\\microsoft.aspnetcore.jsonpatch.5.0.17.nupkg.sha512",
