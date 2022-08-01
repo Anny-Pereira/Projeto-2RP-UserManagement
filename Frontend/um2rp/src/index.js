@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom';
 
 import Login from './pages/Login';
+import Geral from './pages/Geral';
 import NotFound from './pages/NotFound';
 
 const routing = (
@@ -13,6 +14,7 @@ const routing = (
     <div>
       <Routes>
         <Route exact path="/" element={<Login/>} />
+        <Route path="/Geral" element={<Geral/> } />
         <Route path="*" element={<NotFound/> } />
       </Routes>
     </div>

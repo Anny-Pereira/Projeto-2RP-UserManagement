@@ -16,87 +16,94 @@ export default function Login() {
 
     let navigate = useNavigate()
 
-    // const Logar = (event) => {
-    //     event.preventDefault();
-    //     setErroMessage('')
-    //     setIsLoading(true)
+    const Logar = (event) => {
+        event.preventDefault();
+        setErroMessage('')
+        setIsLoading(true)
 
-    //     const data = {
-    //         email: email,
-    //         senha: senha
-    //     }
+        const data = {
+            email: email,
+            senha: senha
+        }
 
-    //     api.post('/Login', data, {})
-    //         .then(response => {
-    //             if (response.status === 200) {
-    //                 localStorage.setItem('usuario-login', response.data.token)
-    //                 setSenha('')
+        api.post('/Login', data, {})
+            .then(response => {
+                if (response.status === 200) {
+                    localStorage.setItem('usuario-login', response.data.token)
+                    setSenha('')
 
-    //                 setEmail('')
+                    setEmail('')
 
-    //                 setIsLoading(false)
+                    setIsLoading(false)
 
-    //                 let base64 = localStorage.getItem('usuario-login').split('.')[1]
-    //                 console.log(base64);
+                    let base64 = localStorage.getItem('usuario-login').split('.')[1]
+                    console.log(base64);
 
-    //                 switch (parseJwt().role) {
-    //                     //Caso Geral
-    //                     case '1':
-    //                         navigate('/Geral')
-    //                         break;
+                    switch (parseJwt().role) {
+                        //Caso Geral
+                        case '1':
+                            navigate('/Geral')
+                            break;
 
-    //                     //Caso Admin
-    //                     case '2':
-    //                         navigate('/Admin')
-    //                         break;
+                        //Caso Admin
+                        case '2':
+                            navigate('/Admin')
+                            break;
 
-    //                     //Caso Root
-    //                     case '3':
-    //                         navigate('/Root')
-    //                         break;
+                        //Caso Root
+                        case '3':
+                            navigate('/Root')
+                            break;
 
-    //                     default:
-    //                         navigate('/')
-    //                         break;
-    //                 }
+                        default:
+                            navigate('/')
+                            break;
+                    }
 
-    //             }
-    //         }).catch(error => {
-    //             console.log(error)
+                }
+            }).catch(error => {
+                console.log(error)
 
-    //             setErroMessage("Email ou senha inválidos!")
+                setErroMessage("Email ou senha inválidos!")
 
-    //             setIsLoading(false)
-    //             console.log(erroMessage)
-    //         })
+                setIsLoading(false)
+                console.log(erroMessage)
+            })
 
-    // }
+    }
 
     return (
-        <div className="lgn">
-            <h1>Hello Word</h1>
-            {/* <section className="container">
-                <div className="lado1">
-                    <img src={logo} alt="Logo User Management 2RP" />
+        <div className="container">
+            <div className="lado1">
+                <div className="epc-lado1">
+                    <img className="logo-login" src={logo} alt="Logo User Management 2RP" />
                     <span className="texto-login">A melhor plataforma online para o gerenciamento de usuários e contas!</span>
                 </div>
-                <div className="lado2">
+            </div>
+            <div className="lado2">
+                <div className="epc-lado2">
                     <h1>Login</h1>
                     <form onSubmit={Logar}>
-                        <div>
-                            <label htmlFor="email"></label>
-                            <input onChange={campo => setEmail(campo.target.value)}
-                                value={email} type="email" className="lgn-input" />
-                            <label htmlFor="senha"></label>
-                            <input onChange={campo => setSenha(campo.target.value)} value={senha}
-                                ype="password" className='lgn-input' />
+                        <div className="epc-inputs">
+                            <div className="tit-input">
+                                <span className="titulo">Email</span>
+                                <label htmlFor="email"></label>
+                                <input onChange={campo => setEmail(campo.target.value)}
+                                    value={email} type="email" className="lgn-input" />
+                            </div>
+                            <div className="tit-input">
+                                <span className="titulo">Senha</span>
+                                <label htmlFor="senha"></label>
+                                <input onChange={campo => setSenha(campo.target.value)} value={senha}
+                                    type="password" className='lgn-input' />
+                            </div>
                         </div>
-                            <span className='lgn-erro'>{erroMessage}</span>
+                        <span className='lgn-erro'>{erroMessage}</span>
 
                         {isLoading ? <button disabled className='lgn_btn lgn_loading' >Carregando</button> : <button type='submit' className='lgn_btn'>Login</button>}
                     </form>
                 </div>
-            </section> */}
+            </div>
         </div>
     )
 }
