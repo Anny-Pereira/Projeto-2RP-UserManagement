@@ -7,7 +7,6 @@ C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\2RP_UserManagement_WebApi.dll
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\ref\2RP_UserManagement_WebApi.dll
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\2RP_UserManagement_WebApi.pdb
-C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\BCrypt.Net-Next.dll
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\Humanizer.dll
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\elilt\OneDrive\Área de Trabalho\Processo-2RP\Backend\UM_2RP_WebApi\2RP_UserManagement_WebApi\2RP_UserManagement_WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll

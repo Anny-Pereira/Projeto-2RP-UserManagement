@@ -1,7 +1,6 @@
 ﻿using _2RP_UserManagement_WebApi.Contexts;
 using _2RP_UserManagement_WebApi.Domains;
 using _2RP_UserManagement_WebApi.Interfaces;
-using _2RP_UserManagement_WebApi.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
