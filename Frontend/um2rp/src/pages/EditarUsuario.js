@@ -40,6 +40,34 @@ export default function Editar() {
                     return item.idUsuario
                 }
                 )
+
+                 
+                info.map((item) => {
+                    setNome(item.nome)
+                    // console.log(nome)
+                    return(nome)
+                 })
+                 info.map((item) => {
+                    setEmail(item.email)
+                    // console.log(email)
+                    return(email)
+                 })
+                 info.map((item) => {
+                    setSenha(item.senha)
+                    //console.log(senha)
+                    return(senha)
+                 })
+                 info.map((item) => {
+                    setIdTipo(item.idTipoUsuario)
+                    // console.log(idTipoUsuario)
+                    return(idTipoUsuario)
+                 })
+                 info.map((item) => {
+                    setStatus(item.status)
+                    // console.log(status)
+                    return(status)
+                 })
+
             }
 
         }).catch(erro => console.log(erro))
@@ -64,7 +92,6 @@ export default function Editar() {
         )
             .then(resposta => {
                 if (resposta.status === 200) {
-                    console.log("entrou")
                     console.log(resposta.data)
                     
                     setNome(resposta.data.nome)
@@ -72,14 +99,15 @@ export default function Editar() {
                     setSenha(resposta.data.senha)
                     setIdTipo(resposta.data.idTipoUsuarioNavigation)
                     setStatus(resposta.data.status)
-
-                    api.put('/Usuarios' + idUsuario, user_atualizado, {
+                    
+                    console.log(idUsuario)
+                    api.put('/Usuarios/' + idUsuario, user_atualizado, {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
                         }
                     }).then((resposta) => {
-                        if (resposta.status === 200) {
-                            console.log("SOU FODA")
+                        if (resposta.status === 204) {
+                            console.log(resposta)
                             navigate('/Geral')
                         }
                     }).catch(erro => console.log(erro))
@@ -146,12 +174,12 @@ export default function Editar() {
                         <div>
                             <h3 className="h3-geral">Nome</h3>
                             <input type="text" className="lgn-input" 
-                                        onChange={(e) => setNome(e.target.value)}/>
+                                name='nome'  value={nome}    onChange={(e) => setNome(e.target.value)}/>
                         </div>
                         <div>
                             <h3 className="h3-geral">Tipo</h3>
                             {/* <input className="lgn-input" value={ idTipoUsuario} onChange={ idTipoUsuario => setIdTipo( idTipoUsuario) }/> */}
-                            <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} >
+                            <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  value={idTipoUsuario}   >
                                 <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                 {
                                     listatipos.map((idtipo) => {
@@ -169,7 +197,7 @@ export default function Editar() {
                             <div className='container_inputs'>
                                 <div className='box_atividade'>
                                     <label className='nome_input'>Ativo:</label>
-                                    <input type="checkbox"  name='Status' className='atividade'
+                                    <input type="checkbox"  name='status' value={status}   className='atividade'
                                          onChange={(e) => setStatus(e.target.value)} />
                                 </div>
                             </div>
@@ -179,12 +207,12 @@ export default function Editar() {
                         <div>
                             <h3 className="h3-geral">Email</h3>
                             <input className="lgn-input" type="email"
-                                         onChange={(e) => setEmail(e.target.value)} />
+                                name='email'  value={email}           onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div>
                             <h3 className="h3-geral">Senha</h3>
                             <input type="password" className="lgn-input" 
-                                        onChange={(e) => setSenha(e.target.value)}/>
+                                  name='senha'  value={senha}   onChange={(e) => setSenha(e.target.value)}/>
                         </div>
                         <button className="lgn_btn" onClick={Editar}>Editar</button>
                     </div>

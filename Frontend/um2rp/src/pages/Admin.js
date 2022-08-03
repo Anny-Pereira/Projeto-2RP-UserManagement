@@ -70,6 +70,7 @@ export default function Admin() {
     const user =
         [
             createData(nome,  email, senha, idTipoUsuario, status),
+            createData(nome,  email, senha, idTipoUsuario, status),
         ]
         
     

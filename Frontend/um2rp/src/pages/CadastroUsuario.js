@@ -26,7 +26,7 @@ export default function Cadastro() {
             }
         }).then((resposta) => {
             if (resposta.status === 200) {
-                console.log(resposta)
+                //console.log(resposta)
                 setListaTipos(resposta.data)
             }
         }).catch(erro => console.log(erro))
@@ -42,16 +42,16 @@ export default function Cadastro() {
             nome: nome,
             email: email,
             senha: senha,
-            satus: status,
+            status: status,
             idTipoUsuario: idTipo
         }
 
-        api.post('/Usuarios', {
+        api.post('/Usuarios', Usuario, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         }).then((resposta) => {
-            if (resposta.status === 200) {
+            if (resposta.status === 201) {
                 console.log(resposta)
                 navigate('/Root')
             }
@@ -67,7 +67,7 @@ export default function Cadastro() {
                 <div className="epc-cadastro">
                     <h1 className='titulo_2'>Cadastrar Usuário</h1>
                     <form className='form_cadastro' onSubmit={(event) => Cadastrar(event)}>
-                        <input placeholder="Nome" type="text" id='Nome' name='Nome'  className='lgn-input' value={nome} onChange={(e) => setNome(e.target.value)} />
+                        <input placeholder="Nome" type="text" id='Nome' name='nome'  className='lgn-input' value={nome} onChange={(e) => setNome(e.target.value)} />
                          <select  className="lgn-input" name="idTipo" value={idTipo} onChange={(e) => setIdTipo(e.target.value)} >
                                 <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                             {
@@ -80,12 +80,12 @@ export default function Cadastro() {
                                 })
                             }
                         </select>
-                        <input placeholder="Email" type="email" name='Email' className='lgn-input' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <input placeholder="Senha" type="password" id='Senha' name='Senha' className='lgn-input' onChange={(e) => setSenha(e.target.value)} />
+                        <input placeholder="Email" type="email" name='email' className='lgn-input' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input placeholder="Senha" type="password" id='senha' name='senha' value={senha} className='lgn-input' onChange={(e) => setSenha(e.target.value)} />
                         <div className='container_inputs'>
                             <div className='box_atividade'>
                                 <label className='nome_input'>Ativo:</label>
-                                <input type="checkbox"  name='Status' className='atividade' id="Status"
+                                <input type="checkbox"  name='status' className='atividade' id="Status"
                                     value={status} onChange={(e) => setStatus(e.target.value)} />
                             </div>
                         </div>
