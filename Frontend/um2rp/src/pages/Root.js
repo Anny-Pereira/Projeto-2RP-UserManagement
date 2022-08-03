@@ -14,7 +14,7 @@ import '../assets/css/geral.css';
 import '../assets/css/root.css';
 import Header from "../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPen, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 
 export default function Root() {
     const [listaUsuarios, setListaUsuarios] = useState([]);
@@ -44,30 +44,31 @@ export default function Root() {
                    return(email)
                 })
                 listaUsuarios.map((item) => {
-                   setEmail(item.email)
-                   // console.log(email)
-                   return(email)
+                   setSenha(item.senha)
+                   //console.log(senha)
+                   return(senha)
                 })
                 listaUsuarios.map((item) => {
-                   setEmail(item.email)
-                   // console.log(email)
-                   return(email)
+                   setIdTipo(item.idTipoUsuario)
+                   // console.log(idTipoUsuario)
+                   return(idTipoUsuario)
                 })
                 listaUsuarios.map((item) => {
-                   setEmail(item.email)
-                   // console.log(email)
-                   return(email)
+                   setStatus(item.status)
+                   // console.log(status)
+                   return(status)
                 })
             };
         })
     }
 
-    function createData(Nome, Email, Senha, Tipo, Status) {
-        return { Nome, Email, Senha, Tipo, Status };
+
+    function createData(name, nome, email, senha, idTipoUsuario, status) {
+        return { name, nome, email, senha, idTipoUsuario, status };
     }
 
     const rows = [
-        createData(nome, email, '6', 2, 0),
+        createData(nome,  email, senha, idTipoUsuario, status),
     ];
 
 
@@ -77,47 +78,51 @@ export default function Root() {
     
     useEffect(ListarUsuarios);
 
-    return (
-        <div>
-            <Header />
-            <section className="container-root">
-                <div className="titulo-info-root">
-                    <h2>Usuários</h2>
-                    <div className="epc-btn-cadastro">
-                        <button className="btn-cadastro" onClick={irCadastro}><span className="span-btn">Cadastrar Usuário</span></button>
-                        <button className="btn-cadastro" onClick={irCadastro}><FontAwesomeIcon icon={faCirclePlus} fontSize={25} color={"#011949"}></FontAwesomeIcon></button>
+
+        return (
+            <div>
+                <Header />
+                <section className="container-root">
+                    <div className="titulo-info-root">
+                        <h2>Usuários</h2>
+                        <div className="epc-btn-cadastro">
+                            <button className="btn-cadastro" onClick={irCadastro}><span className="span-btn">Cadastrar Usuário</span></button>
+                            <button className="btn-cadastro" onClick={irCadastro}><FontAwesomeIcon icon={faCirclePlus} fontSize={25} color={"#011949"}></FontAwesomeIcon></button>
+                        </div>
                     </div>
-                </div>
-                <div>
-                <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">Nome</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Senha</TableCell>
-            <TableCell align="right">Tipo</TableCell>
-            <TableCell>Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-                </div>
-            </section>
-        </div>
-    )
+                    <div>
+                    <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="caption table">
+            <TableHead>
+              <TableRow>
+                <TableCell color="blue">Nome</TableCell>
+                <TableCell >Email</TableCell>
+                <TableCell >Senha</TableCell>
+                <TableCell >Tipo</TableCell>
+                <TableCell >Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell >{row.nome}</TableCell>
+                  <TableCell >{row.email}</TableCell>
+                  <TableCell >{row.senha}</TableCell>
+                  <TableCell >{row.idTipoUsuario}</TableCell>
+                  <TableCell >{row.status ? 'Ativo' : 'Inativo'}</TableCell>
+                  <TableCell ><FontAwesomeIcon icon={faPen} fontSize={18}/></TableCell>
+                  <TableCell ><FontAwesomeIcon icon={faTrash} fontSize={18}/></TableCell>
+                </TableRow>
+              ))}   
+            </TableBody>
+          </Table>
+        </TableContainer>
+                    </div>
+                </section>
+            </div>
+        )   
     
 }
