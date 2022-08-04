@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>2RP_UserManagement_WebApi</name>
+    </assembly>
+    <members>
+        <member name="F:_2RP_UserManagement_WebApi.Controllers.LoginController._usuarioRepository">
+            <summary>
+            Objeto que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.LoginController.#ctor(_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository)">
+            <summary>
+            Instancia o objeto para que haja referência às implementações feitas no repositório
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.LoginController.Login(_2RP_UserManagement_WebApi.ViewModels.LoginViewModel)">
+            <summary>
+            Autentica um usuario
+            </summary>
+        </member>
+        <member name="F:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController._tipoUsuarioRepository">
+            <summary>
+            Objeto que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.#ctor(_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository)">
+            <summary>
+            Instancia o objeto para que haja referência às implementações feitas no repositório
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.ListarTodos">
+            <summary>
+            Lista todos os tipos de usuários
+            </summary>
+            <returns>Uma lista de tipos de usuarios</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.Cadastrar(_2RP_UserManagement_WebApi.Domains.TipoUsuario)">
+            Cadastra um novo TipoUsuario
+            <param name="novoTipo">objeto que será cadastrado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.Atualizar(System.Int32,_2RP_UserManagement_WebApi.Domains.TipoUsuario)">
+            <summary>
+            Atualiza um tipoUsuario existente
+            </summary>
+            <param name="id">id do tipoUsuario que será atualizado</param>
+            <param name="novoTipo">objeto com as informações atualizadas</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um tipoUsuario através do seu id
+            </summary>
+            <param name="id">id do tipoUsuario que será buscado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.TiposUsuarioController.Deletar(System.Int32)">
+            <summary>
+            Deleta um tipoUsuario através do seu id
+            </summary>
+            <param name="id">id do tipoUsuario que será deletado</param>
+        </member>
+        <member name="F:_2RP_UserManagement_WebApi.Controllers.UsuariosController._usuarioRepository">
+            <summary>
+            Objeto que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.#ctor(_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository)">
+            <summary>
+            Instancia o objeto para que haja referência às implementações feitas no repositório
+            </summary>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.ListarTodos">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuarios</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.Cadastrar(_2RP_UserManagement_WebApi.Domains.Usuario)">
+            Cadastra um novo Usuario
+            <param name="novoUsuario">objeto que será cadastrado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.Atualizar(System.Int32,_2RP_UserManagement_WebApi.Domains.Usuario)">
+            <summary>
+            Atualiza um Usuario existente
+            </summary>
+            <param name="id">id do Usuario que será atualizado</param>
+            <param name="novoUsuario">objeto com as informações atualizadas</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um Usuario através do seu id
+            </summary>
+            <param name="id">id do tipoUsuario que será buscado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Controllers.UsuariosController.Deletar(System.Int32)">
+            <summary>
+            Deleta um Usuario através do seu id
+            </summary>
+            <param name="id">id do Usuario que será deletado</param>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository.ListarTodos">
+            <summary>
+            Lista todos os Tipos de Usuario cadastrados
+            </summary>
+            <returns>Uma lista de Tipos de Usuario</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um tipoUsuário através do seu id
+            </summary>
+            <param name="id">id do TipoUsuario</param>
+            <returns>Um TipoUsuario específico</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository.Cadastrar(_2RP_UserManagement_WebApi.Domains.TipoUsuario)">
+            <summary>
+            Cadastra um novo tipo de usuário
+            </summary>
+            <param name="novoTipo">Dados do tipo de usuario a ser cadastrado</param>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um TipoUsuario através do seu id
+            </summary>
+            <param name="id">id do Tipo de Usuario a ser deletado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.ITipoUsuarioRepository.Atualizar(System.Int32,_2RP_UserManagement_WebApi.Domains.TipoUsuario)">
+            <summary>
+            Atualiza os dados de um tipo de usuário
+            </summary>
+            <param name="id">id do usuário</param>
+            <param name="novoTipo">Dados atualizados do tipo de usuário</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.ListarTodos">
+            <summary>
+            Lista todos os usuarios cadastrados
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.ListarMinhas(System.Int32)">
+            <summary>
+            Lista as informações de um determinado usuario
+            </summary>
+            <param name="id">id do usuario </param>
+            <returns>Uma lista com as informações de um usuario</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um usuário através do seu id
+            </summary>
+            <param name="id">id do usuário</param>
+            <returns>Um usuário específico</returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.Cadastrar(_2RP_UserManagement_WebApi.Domains.Usuario)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novoUsuario">Dados do usuario a ser cadastrado</param>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um usuário através do seu id
+            </summary>
+            <param name="id">id do usuário a ser deletado</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.Atualizar(System.Int32,_2RP_UserManagement_WebApi.Domains.Usuario)">
+            <summary>
+            Atualiza os dados de um usuário
+            </summary>
+            <param name="id">id do usuário</param>
+            <param name="novoUsuario">Dados atualizados do usuário</param>
+            <returns></returns>
+        </member>
+        <member name="M:_2RP_UserManagement_WebApi.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            Autentica um usuário cadastrado
+            </summary>
+            <param name="email">Email do usuario</param>
+            <param name="senha">Senha do usuário</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
