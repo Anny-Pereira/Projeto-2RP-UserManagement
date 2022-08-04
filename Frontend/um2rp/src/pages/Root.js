@@ -116,6 +116,22 @@ export default function Root() {
 
     }
 
+    const ExcluirUsuario = (id) => {
+        api.delete(`/Usuarios/${id}`, {
+          headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+          },
+      })
+        .then(resposta => {
+          if(resposta.status === 204) {
+            console.log(resposta)
+          }
+        })
+        .catch(ex => {
+          console.log(ex)
+        })
+      }
+
 
 
 
@@ -170,7 +186,7 @@ export default function Root() {
 
                                 <button
                                     className="lgn_btn"
-                                    onClick={() => EditarUser(idUsuario)}
+                                    onClick={(idUsuario) => EditarUser(idUsuario)}
                                 >
                                     Salvar
                                 </button>
@@ -217,7 +233,7 @@ export default function Root() {
                                             <td>{item.status ? 'Ativo' : 'Inativo'}</td>
 
                                             <td><button className="lgn_btn-cancel-root" onClick={() => abrirModal(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
-                                            <td><button className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
+                                            <td><button  onClick={(id) => ExcluirUsuario(item.idUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
 
                                         </tr>
 
