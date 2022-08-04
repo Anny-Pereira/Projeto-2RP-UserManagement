@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //import api from '../services/api';
 import '../assets/css/geral.css';
 import '../assets/css/header.css';
+import '../assets/css/root.css';
 import logo from '../assets/images/Logo-Header.png'
 import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -84,7 +85,7 @@ export default function Editar() {
             status: status,
         }
 
-        api.get('/Usuarios/', {
+        api.get('/Usuarios/minhas', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
@@ -174,12 +175,12 @@ export default function Editar() {
                         <div>
                             <h3 className="h3-geral">Nome</h3>
                             <input type="text" className="lgn-input" 
-                                name='nome'  value={nome}    onChange={(e) => setNome(e.target.value)}/>
+                                name='nome'    onChange={(e) => setNome(e.target.value)}/>
                         </div>
                         <div>
                             <h3 className="h3-geral">Tipo</h3>
                             {/* <input className="lgn-input" value={ idTipoUsuario} onChange={ idTipoUsuario => setIdTipo( idTipoUsuario) }/> */}
-                            <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  value={idTipoUsuario}   >
+                            <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  >
                                 <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                 {
                                     listatipos.map((idtipo) => {
@@ -197,7 +198,7 @@ export default function Editar() {
                             <div className='container_inputs'>
                                 <div className='box_atividade'>
                                     <label className='nome_input'>Ativo:</label>
-                                    <input type="checkbox"  name='status' value={status}   className='atividade'
+                                    <input type="checkbox"  name='status'  className='atividade'
                                          onChange={(e) => setStatus(e.target.value)} />
                                 </div>
                             </div>
@@ -207,12 +208,12 @@ export default function Editar() {
                         <div>
                             <h3 className="h3-geral">Email</h3>
                             <input className="lgn-input" type="email"
-                                name='email'  value={email}           onChange={(e) => setEmail(e.target.value)} />
+                                name='email'         onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div>
                             <h3 className="h3-geral">Senha</h3>
                             <input type="password" className="lgn-input" 
-                                  name='senha'  value={senha}   onChange={(e) => setSenha(e.target.value)}/>
+                                  name='senha'   onChange={(e) => setSenha(e.target.value)}/>
                         </div>
                         <button className="lgn_btn" onClick={Editar}>Editar</button>
                     </div>

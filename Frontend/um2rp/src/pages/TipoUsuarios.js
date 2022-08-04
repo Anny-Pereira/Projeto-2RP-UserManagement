@@ -1,102 +1,142 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 
 import api from '../services/api';
 import '../assets/css/geral.css';
 import '../assets/css/root.css';
+import '../assets/css/geral.css';
+import '../assets/css/login.css';
 import Header from "../components/Header";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faPen, faCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 
 export default function TiposUsuario() {
     const [listaTipos, setListaTipos] = useState([]);
-    const [ idTipoUsuario, setIdTipo] = useState([]);
+    const [idTipoUsuario, setIdTipo] = useState([]);
     const [titulo, setTitulo] = useState([]);
 
 
-    function ListarTipos(){
-        api.get('/TiposUsuario',  {
+    function ListarTipos() {
+        api.get('/TiposUsuario', {
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login') }
         }).then(resposta => {
             if (resposta.status === 200) {
                 //console.log(resposta.data)
                 setListaTipos(resposta.data)
-                
+
                 listaTipos.map((item) => {
                     setIdTipo(item.idTipoUsuario)
                     // console.log(idTipoUsuario)
-                    return(idTipoUsuario)
+                    return (idTipoUsuario)
                 })
 
                 listaTipos.map((item) => {
                     setTitulo(item.titulo)
                     console.log(titulo)
-                    return(titulo)
+                    return (titulo)
                 })
-                
+
             };
         }).catch(erro => console.log(erro))
     }
 
+    //function BasicModal()
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-    function createData(name, idTipoUsuario, titulo) {
-        return { name, idTipoUsuario, titulo };
+    function abrirModal() {
+
+        handleOpen();
+    }
+    function fecharModal() {
+        handleClose();
     }
 
-    const rows = [
-        createData( idTipoUsuario, titulo),
-    ];
 
 
-    
     useEffect(ListarTipos);
 
 
-        return (
-            <div>
-                <Header />
-                <section className="container-root">
-                    <div className="titulo-info-root">
-                        <h2>Tipos de Usuários</h2>
-                        <div className="epc-btn-cadastro">
-                            <button className="btn-cadastro" ><span className="span-btn">Cadastrar Tipo</span></button>
-                            <button className="btn-cadastro" ><FontAwesomeIcon icon={faCirclePlus} fontSize={25} color={"#011949"}></FontAwesomeIcon></button>
-                        </div>
+    return (
+        <div>
+            <Header />
+            <section className="container-root">
+                <div className="titulo-info-root">
+                    <h2>Tipos de Usuários</h2>
+
+                    <div className="epc-btn-cadastro">
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+
+                        >
+                            <Box >
+                                <div>
+
+                                    <div className="space-modal-descricao">
+                                        <h2 >Cadastrar Tipo</h2>
+                                        <form>
+                                            <input className="lgn-input" type="text" name="titulo" onChange={(e) => setTitulo(e.target.value)} placeholder="Titulo" />
+
+                                        </form>
+
+                                        <button
+                                            className="lgn_btn"
+                                            onClick={() => fecharModal()}
+                                        >
+                                            Cadastrar
+                                        </button>
+                                        <button
+                                            className="lgn_btn-cancel-modal"
+                                            onClick={() => fecharModal()}
+                                        >
+                                            Cancelar
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </Box>
+                        </Modal>
+                        <button onClick={abrirModal} className="btn-cadastro" ><span className="span-btn">Cadastrar Tipo</span></button>
+                        <button onClick={abrirModal} className="btn-cadastro" ><FontAwesomeIcon icon={faCirclePlus} fontSize={25} color={"#011949"}></FontAwesomeIcon></button>
                     </div>
-                    <div>
-                    <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="caption table">
-            <TableHead>
-              <TableRow>
-                <TableCell >Id</TableCell>
-                <TableCell >Título</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell >{row.idTipoUsuario}</TableCell>
-                  <TableCell >{row.titulo}</TableCell>
-                  <TableCell ><FontAwesomeIcon icon={faPen} fontSize={18} /></TableCell>
-                  <TableCell ><FontAwesomeIcon icon={faTrash} fontSize={18} /></TableCell>
-                </TableRow>
-              ))}   
-            </TableBody>
-          </Table>
-        </TableContainer>
-                    </div>
-                </section>
-            </div>
-        )   
-    
+                </div>
+                <div>
+                    <table className="tabela-lista">
+                        <thead>
+                            <tr>
+                                <th className="tit">Id</th>
+                                <th className="tit">Título</th>
+                            </tr>
+                        </thead>
+                        <tbody className="tabela-lista-corpo">
+                            {
+                                listaTipos.map((item) => {
+                                    return (
+
+                                        <tr key={item.idTipoUsuario}>
+
+                                            <td>{item.idTipoUsuario}</td>
+                                            <td>{item.titulo}</td>
+
+
+                                        </tr>
+
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    )
+
 }

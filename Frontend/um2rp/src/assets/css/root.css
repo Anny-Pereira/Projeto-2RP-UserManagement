@@ -36,3 +36,39 @@
     font-weight: 500;
     font-size: 18px;
   }
+
+  .space-modal-descricao{
+    margin-top: 15vh;
+      width: 40vw;
+      border: #011949 2px solid;
+      background-color: #efefef;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0 auto;
+  }
+
+  .lgn_btn-cancel-modal{
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #011949;
+}
+
+.tabela-lista{
+  width: 80vw;
+}
+
+.tit{
+  text-align: left;
+}
+
+.lgn_btn-cancel-root{
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #011949;
+}
