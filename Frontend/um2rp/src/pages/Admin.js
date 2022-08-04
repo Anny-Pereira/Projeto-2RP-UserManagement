@@ -124,6 +124,8 @@ export default function Root() {
     }
 
     useEffect(ListarUsuarios);
+    useEffect(ListarTipos, []);
+
 
 
     return (

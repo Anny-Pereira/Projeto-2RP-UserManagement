@@ -8,12 +8,13 @@ titulo VARCHAR(255) UNIQUE NOT NULL
 );
 GO
 
+
 CREATE TABLE usuario(
 idUsuario INT PRIMARY KEY IDENTITY(1,1),
-idTipoUsuario INT FOREIGN KEY REFERENCES tipoUsuario(idTipoUsuario),
+idTipoUsuario INT FOREIGN KEY REFERENCES tipoUsuario(idTipoUsuario) NOT NULL default 1,
 nome VARCHAR(255) NOT NULL,
 email VARCHAR(255) UNIQUE NOT NULL,
 senha VARCHAR(255) NOT NULL,
-status BIT 
+status BIT NOT NULL default 1
 );
 GO

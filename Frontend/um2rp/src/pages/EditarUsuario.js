@@ -145,7 +145,7 @@ export default function Editar() {
 
 
     useEffect(BuscarID);
-    useEffect(ListarTipos, []);
+    useEffect(ListarTipos);
 
 
     return (
@@ -183,10 +183,10 @@ export default function Editar() {
                             <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  >
                                 <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                 {
-                                    listatipos.map((idtipo) => {
+                                    listatipos.map((idTipoUsuario) => {
                                         return (
-                                            <option key={idtipo.idTipoUsuario} value={idtipo.idTipoUsuario}>
-                                                {idtipo.titulo}
+                                            <option key={idTipoUsuario.idTipoUsuario} >
+                                                {idTipoUsuario.titulo}
                                             </option>
                                         )
                                     })
