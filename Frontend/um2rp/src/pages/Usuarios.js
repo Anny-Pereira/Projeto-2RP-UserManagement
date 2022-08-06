@@ -7,11 +7,12 @@ import api from '../services/api';
 import '../assets/css/geral.css';
 import '../assets/css/geral.css';
 import '../assets/css/login.css';
+import { parseJwt } from "../services/auth";
 import Header from "../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function Root() {
+export default function Usuarios() {
     const [listaUsuarios, setListaUsuarios] = useState([]);
     const [nome, setNome] = useState([]);
     const [email, setEmail] = useState([]);
@@ -20,6 +21,7 @@ export default function Root() {
     const [status, setStatus] = useState([]);
     const [listaTipos, setListaTipos] = useState([]);
     const [idUsuario, setIdUsuario] = useState(0);
+    const [root, setRoot] = useState(false);
 
     let navigate = useNavigate();
 
@@ -36,6 +38,28 @@ export default function Root() {
     }
     function fecharModal() {
         handleClose();
+    }
+
+    function direcionarRota() {
+
+        let base64 = localStorage.getItem('usuario-login').split('.')[1]
+        console.log(base64);
+
+        switch (parseJwt().role) {
+
+            //Caso Admin
+            case '2':
+                setRoot(false);
+                break;
+
+            //Caso Root
+            case '3':
+                setRoot(true);
+                break;
+
+            default:
+                break;
+        }
     }
 
     function ListarTipos() {
@@ -57,7 +81,7 @@ export default function Root() {
         }).then(resposta => {
             if (resposta.status === 200) {
                 setListaUsuarios(resposta.data)
-                console.log(listaUsuarios)
+                //console.log(listaUsuarios)
 
                 listaUsuarios.map((item) => {
                     setNome(item.nome)
@@ -100,7 +124,7 @@ export default function Root() {
             status: status,
         }
 
-        console.log('vamos editar')
+        console.log(idUsuario)
 
         console.log(idUsuario)
         api.put('/Usuarios/' + idUsuario, user, {
@@ -116,6 +140,22 @@ export default function Root() {
 
     }
 
+    const ExcluirUsuario = (id) => {
+        api.delete(`/Usuarios/${id}`, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then(resposta => {
+                if (resposta.status === 204) {
+                    console.log(resposta)
+                }
+            })
+            .catch(ex => {
+                console.log(ex)
+            })
+    }
+
 
 
 
@@ -125,7 +165,7 @@ export default function Root() {
 
     useEffect(ListarUsuarios);
     useEffect(ListarTipos, []);
-
+    useEffect(direcionarRota, []);
 
 
     return (
@@ -146,7 +186,7 @@ export default function Root() {
                                 <h2 >Editar Usuário</h2>
                                 <form>
                                     <input className="lgn-input" type="text" name="nome" onChange={(e) => setNome(e.target.value)} placeholder="Nome" />
-                                    <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  >
+                                    <select className="lgn-input" name="idTipoUsuario" onChange={(e) => setIdTipo(e.target.value)} >
                                         <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                         {
                                             listaTipos.map((idtipo) => {
@@ -171,7 +211,7 @@ export default function Root() {
 
                                 <button
                                     className="lgn_btn"
-                                    onClick={() => EditarUser(idUsuario)}
+                                    onClick={(idUsuario) => EditarUser(idUsuario)}
                                 >
                                     Salvar
                                 </button>
@@ -198,9 +238,9 @@ export default function Root() {
                     <table className="tabela-lista">
                         <thead>
                             <tr>
-                                <th  className="tit">Nome</th>
-                                <th  className="tit">Tipo</th>
-                                <th  className="tit">Email</th>
+                                <th className="tit">Nome</th>
+                                <th className="tit">Tipo</th>
+                                <th className="tit">Email</th>
                                 <th className="tit">Senha</th>
                                 <th className="tit">Status</th>
                             </tr>
@@ -209,15 +249,18 @@ export default function Root() {
                             {
                                 listaUsuarios.map((item) => {
                                     return (
-                                       
+
                                         <tr key={item.idUsuario}>
                                             <td>{item.nome}</td>
-                                            <td>{item.idTipoUsuario}</td>
+                                            <td>{item.idTipoUsuarioNavigation.titulo}</td>
                                             <td>{item.email}</td>
                                             <td>{item.senha}</td>
                                             <td>{item.status ? 'Ativo' : 'Inativo'}</td>
 
                                             <td><button className="lgn_btn-cancel-root" onClick={() => abrirModal(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
+                                            {root ? <td><button onClick={(id) => ExcluirUsuario(item.idUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
+                                                :
+                                                <></> }
                                         </tr>
 
                                     )

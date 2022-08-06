@@ -53,7 +53,7 @@ export default function Cadastro() {
         }).then((resposta) => {
             if (resposta.status === 201) {
                 console.log(resposta)
-                navigate('/Root')
+                navigate('/Usuarios')
             }
         }).catch(erro => console.log(erro))
     }

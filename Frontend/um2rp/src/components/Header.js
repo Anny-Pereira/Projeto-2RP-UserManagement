@@ -11,7 +11,6 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Header() {
-    const [adm, setAdm] = useState(false);
     const [geral, setGeral] = useState(false);
     let navigate = useNavigate()
 
@@ -31,19 +30,16 @@ export default function Header() {
         switch (parseJwt().role) {
             //Caso Geral
             case '1':
-                setAdm(false);
                 setGeral(true);
                 break;
 
             //Caso Admin
             case '2':
-                setAdm(true);
                 setGeral(false);
                 break;
 
             //Caso Root
             case '3':
-                setAdm(false);
                 setGeral(false);
                 break;
 
@@ -62,7 +58,7 @@ export default function Header() {
 
                {geral ? '' :
                 <ul className='nav_links'>
-                <span className='span'> {adm ? <NavLink to='/Admin' >Usuários</NavLink> : <NavLink to='/Root' activeClassName>Usuários</NavLink>}</span>
+                <span className='span'><NavLink to='/Usuarios' >Usuários</NavLink></span>
                 <span className='span'><NavLink to='/Tipos' >Tipos</NavLink></span>
                 <span className='span'><NavLink to='/Geral'>Perfil</NavLink></span>
             </ul>

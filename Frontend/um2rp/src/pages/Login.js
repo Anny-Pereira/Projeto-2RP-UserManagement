@@ -47,12 +47,12 @@ export default function Login() {
 
                         //Caso Admin
                         case '2':
-                            navigate('/Admin')
+                            navigate('/Usuarios')
                             break;
 
                         //Caso Root
                         case '3':
-                            navigate('/Root')
+                            navigate('/Usuarios')
                             break;
 
                         default:

@@ -68,7 +68,7 @@ namespace _2RP_UserManagement_WebApi.Repositories
 
         public List<Usuario> ListarTodos()
         {
-            return ctx.Usuarios.ToList();
+            return ctx.Usuarios.Include(u => u.IdTipoUsuarioNavigation).ToList();
         }
 
         public Usuario Login(string email, string senha)
