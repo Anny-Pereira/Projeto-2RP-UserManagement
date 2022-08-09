@@ -33,7 +33,7 @@ export default function Cadastro() {
     }
 
     function Voltar(){
-        navigate('/Root')
+        navigate('/Usuarios')
     }
 
     const Cadastrar = (event) => {

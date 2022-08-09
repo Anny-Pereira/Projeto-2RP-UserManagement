@@ -33,9 +33,9 @@ export default function Usuarios() {
     function abrirModal(id) {
 
         console.log(id);
-        setIdUsuario(id);
         handleOpen();
     }
+    
     function fecharModal() {
         handleClose();
     }
@@ -69,7 +69,7 @@ export default function Usuarios() {
             }
         }).then((resposta) => {
             if (resposta.status === 200) {
-                //console.log(resposta)
+                console.log(resposta)
                 setListaTipos(resposta.data)
             }
         }).catch(erro => console.log(erro))
@@ -81,40 +81,41 @@ export default function Usuarios() {
         }).then(resposta => {
             if (resposta.status === 200) {
                 setListaUsuarios(resposta.data)
-                //console.log(listaUsuarios)
+                console.log(listaUsuarios)
 
-                listaUsuarios.map((item) => {
-                    setNome(item.nome)
-                    // console.log(nome)
-                    return (nome)
-                })
-                listaUsuarios.map((item) => {
-                    setEmail(item.email)
-                    // console.log(email)
-                    return (email)
-                })
-                listaUsuarios.map((item) => {
-                    setSenha(item.senha)
-                    //console.log(senha)
-                    return (senha)
-                })
-                listaUsuarios.map((item) => {
-                    setIdTipo(item.idTipoUsuario)
-                    // console.log(idTipoUsuario)
-                    return (idTipoUsuario)
-                })
-                listaUsuarios.map((item) => {
-                    setStatus(item.status)
-                    // console.log(status)
-                    return (status)
-                })
+                // listaUsuarios.map((item) => {
+                //     setNome(item.nome)
+                //     // console.log(nome)
+                //     return (nome)
+                // })
+                // listaUsuarios.map((item) => {
+                //     setEmail(item.email)
+                //     // console.log(email)
+                //     return (email)
+                // })
+                // listaUsuarios.map((item) => {
+                //     setSenha(item.senha)
+                //     //console.log(senha)
+                //     return (senha)
+                // })
+                // listaUsuarios.map((item) => {
+                //     setIdTipo(item.idTipoUsuario)
+                //     // console.log(idTipoUsuario)
+                //     return (idTipoUsuario)
+                // })
+                // listaUsuarios.map((item) => {
+                //     setStatus(item.status)
+                //     // console.log(status)
+                //     return (status)
+                // })
             };
         })
     }
 
 
-    function EditarUser(event, idUsuario) {
-        event.preventDefault();
+    function EditarUser(idUsuario) {
+
+        abrirModal(idUsuario)
 
         let user = {
             nome: nome,
@@ -164,8 +165,7 @@ export default function Usuarios() {
     }
 
     useEffect(ListarUsuarios);
-    useEffect(ListarTipos, []);
-    useEffect(direcionarRota, []);
+    useEffect(direcionarRota, ListarTipos, []);
 
 
     return (
@@ -189,10 +189,10 @@ export default function Usuarios() {
                                     <select className="lgn-input" name="idTipoUsuario" onChange={(e) => setIdTipo(e.target.value)} >
                                         <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                         {
-                                            listaTipos.map((idtipo) => {
+                                            listaTipos.map((idTipoUsuario) => {
                                                 return (
-                                                    <option key={idtipo.idTipoUsuario} value={idtipo.idTipoUsuario}>
-                                                        {idtipo.titulo}
+                                                    <option key={idTipoUsuario.idTipoUsuario} value={idTipoUsuario.idTipoUsuario}>
+                                                        {idTipoUsuario.titulo}
                                                     </option>
                                                 )
                                             })
@@ -211,7 +211,7 @@ export default function Usuarios() {
 
                                 <button
                                     className="lgn_btn"
-                                    onClick={(idUsuario) => EditarUser(idUsuario)}
+                                    type="submit"
                                 >
                                     Salvar
                                 </button>
@@ -257,7 +257,7 @@ export default function Usuarios() {
                                             <td>{item.senha}</td>
                                             <td>{item.status ? 'Ativo' : 'Inativo'}</td>
 
-                                            <td><button className="lgn_btn-cancel-root" onClick={() => abrirModal(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
+                                            <td><button className="lgn_btn-cancel-root" onClick={(id) => EditarUser(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
                                             {root ? <td><button onClick={(id) => ExcluirUsuario(item.idUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
                                                 :
                                                 <></> }

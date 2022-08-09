@@ -27,18 +27,6 @@ export default function TiposUsuario() {
                 //console.log(resposta.data)
                 setListaTipos(resposta.data)
 
-                listaTipos.map((item) => {
-                    setIdTipo(item.idTipoUsuario)
-                    // console.log(idTipoUsuario)
-                    return (idTipoUsuario)
-                })
-
-                listaTipos.map((item) => {
-                    setTitulo(item.titulo)
-                    //console.log(titulo)
-                    return (titulo)
-                })
-
             };
         }).catch(erro => console.log(erro))
     }
@@ -51,6 +39,8 @@ export default function TiposUsuario() {
         }
      
         console.log('oiii')
+        console.log(Tipo)
+        console.log(titulo)
 
         api.post('/TiposUsuario', Tipo , {
             headers: {
@@ -119,7 +109,7 @@ export default function TiposUsuario() {
 
                                     <div className="space-modal-descricao">
                                         <h2 >Cadastrar Tipo</h2>
-                                        <form  onSubmit={(event) => Cadastrar(event)}>
+                                        <form >
                                             <input className="lgn-input" type="text" name="titulo" onChange={(e) => setTitulo(e.target.value)} placeholder="Titulo" />
 
                                         </form>
