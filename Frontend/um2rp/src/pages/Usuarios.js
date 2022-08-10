@@ -14,11 +14,11 @@ import { faTrash, faPen, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function Usuarios() {
     const [listaUsuarios, setListaUsuarios] = useState([]);
-    const [nome, setNome] = useState([]);
-    const [email, setEmail] = useState([]);
-    const [senha, setSenha] = useState([]);
-    const [idTipoUsuario, setIdTipo] = useState([]);
-    const [status, setStatus] = useState([]);
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [idTipoUsuario, setIdTipo] = useState(0);
+    const [status, setStatus] = useState(false);
     const [listaTipos, setListaTipos] = useState([]);
     const [idUsuario, setIdUsuario] = useState(0);
     const [root, setRoot] = useState(false);
@@ -33,9 +33,10 @@ export default function Usuarios() {
     function abrirModal(id) {
 
         console.log(id);
+        setIdUsuario(id);
         handleOpen();
     }
-    
+
     function fecharModal() {
         handleClose();
     }
@@ -43,7 +44,7 @@ export default function Usuarios() {
     function direcionarRota() {
 
         let base64 = localStorage.getItem('usuario-login').split('.')[1]
-        console.log(base64);
+        //console.log(base64);
 
         switch (parseJwt().role) {
 
@@ -69,7 +70,7 @@ export default function Usuarios() {
             }
         }).then((resposta) => {
             if (resposta.status === 200) {
-                console.log(resposta)
+                //console.log(resposta)
                 setListaTipos(resposta.data)
             }
         }).catch(erro => console.log(erro))
@@ -81,41 +82,17 @@ export default function Usuarios() {
         }).then(resposta => {
             if (resposta.status === 200) {
                 setListaUsuarios(resposta.data)
-                console.log(listaUsuarios)
+                //console.log(listaUsuarios)
 
-                // listaUsuarios.map((item) => {
-                //     setNome(item.nome)
-                //     // console.log(nome)
-                //     return (nome)
-                // })
-                // listaUsuarios.map((item) => {
-                //     setEmail(item.email)
-                //     // console.log(email)
-                //     return (email)
-                // })
-                // listaUsuarios.map((item) => {
-                //     setSenha(item.senha)
-                //     //console.log(senha)
-                //     return (senha)
-                // })
-                // listaUsuarios.map((item) => {
-                //     setIdTipo(item.idTipoUsuario)
-                //     // console.log(idTipoUsuario)
-                //     return (idTipoUsuario)
-                // })
-                // listaUsuarios.map((item) => {
-                //     setStatus(item.status)
-                //     // console.log(status)
-                //     return (status)
-                // })
+                
             };
         })
     }
 
 
-    function EditarUser(idUsuario) {
+    function EditarUser() {
 
-        abrirModal(idUsuario)
+        console.log('editar')
 
         let user = {
             nome: nome,
@@ -125,9 +102,9 @@ export default function Usuarios() {
             status: status,
         }
 
-        console.log(idUsuario)
+        console.log(status)
+        // console.log(user)
 
-        console.log(idUsuario)
         api.put('/Usuarios/' + idUsuario, user, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
@@ -149,7 +126,7 @@ export default function Usuarios() {
         })
             .then(resposta => {
                 if (resposta.status === 204) {
-                    console.log(resposta)
+                    //console.log(resposta)
                 }
             })
             .catch(ex => {
@@ -165,7 +142,8 @@ export default function Usuarios() {
     }
 
     useEffect(ListarUsuarios);
-    useEffect(direcionarRota, ListarTipos, []);
+    useEffect(direcionarRota, []);
+    useEffect(ListarTipos, [])
 
 
     return (
@@ -203,24 +181,26 @@ export default function Usuarios() {
                                     <div className='container_inputs'>
                                         <div >
                                             <label className='nome_input'>Ativo:</label>
-                                            <input type="checkbox" name='status' className='atividade'
-                                                onChange={(e) => setStatus(e.target.value)} />
+                                            <input type="checkbox"  name='status'
+                                            onChange={(e) => setStatus(e.target.checked)} />
                                         </div>
                                     </div>
+
+                                    <button
+                                        className="lgn_btn"
+                                        type="submit"
+                                        onClick={() => EditarUser()}
+                                    >
+                                        Salvar
+                                    </button>
+                                    <button
+                                        className="lgn_btn-cancel-modal"
+                                        onClick={() => fecharModal()}
+                                    >
+                                        Cancelar
+                                    </button>
                                 </form>
 
-                                <button
-                                    className="lgn_btn"
-                                    type="submit"
-                                >
-                                    Salvar
-                                </button>
-                                <button
-                                    className="lgn_btn-cancel-modal"
-                                    onClick={() => fecharModal()}
-                                >
-                                    Cancelar
-                                </button>
                             </div>
 
 
@@ -257,10 +237,10 @@ export default function Usuarios() {
                                             <td>{item.senha}</td>
                                             <td>{item.status ? 'Ativo' : 'Inativo'}</td>
 
-                                            <td><button className="lgn_btn-cancel-root" onClick={(id) => EditarUser(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
+                                            <td><button className="lgn_btn-cancel-root" onClick={() => abrirModal(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
                                             {root ? <td><button onClick={(id) => ExcluirUsuario(item.idUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
                                                 :
-                                                <></> }
+                                                <></>}
                                         </tr>
 
                                     )

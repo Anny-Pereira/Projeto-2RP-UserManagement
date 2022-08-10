@@ -73,7 +73,7 @@ namespace _2RP_UserManagement_WebApi.Controllers
         /// <param name="id">id do Usuario que será atualizado</param>
         /// <param name="novoUsuario">objeto com as informações atualizadas</param>
         /// <returns></returns>
-        [Authorize(Roles = "2, 3")]
+        [Authorize(Roles = "1, 2, 3")]
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Usuario novoUsuario)
         {

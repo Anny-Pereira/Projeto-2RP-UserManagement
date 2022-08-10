@@ -25,7 +25,7 @@ export default function Header() {
     function direcionarRota() {
 
         let base64 = localStorage.getItem('usuario-login').split('.')[1]
-        console.log(base64);
+        //console.log(base64);
 
         switch (parseJwt().role) {
             //Caso Geral

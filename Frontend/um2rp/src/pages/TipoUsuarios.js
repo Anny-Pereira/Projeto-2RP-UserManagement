@@ -38,10 +38,6 @@ export default function TiposUsuario() {
             titulo: titulo
         }
      
-        console.log('oiii')
-        console.log(Tipo)
-        console.log(titulo)
-
         api.post('/TiposUsuario', Tipo , {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
@@ -49,7 +45,6 @@ export default function TiposUsuario() {
         }).then((resposta) => {
             if (resposta.status === 201) {
                 console.log(resposta)
-                console.log('foi')
                 fecharModal()
             }
         }).catch(erro => console.log(erro))

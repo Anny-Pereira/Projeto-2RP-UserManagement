@@ -28,7 +28,6 @@ namespace _2RP_UserManagement_WebApi.Repositories
                 usuarioBuscado.Email = novoUsuario.Email;
                 usuarioBuscado.Senha = novoUsuario.Senha;
                 usuarioBuscado.Status = novoUsuario.Status;
-                usuarioBuscado.IdTipoUsuario = novoUsuario.IdTipoUsuario;
             }
 
             ctx.Usuarios.Update(usuarioBuscado);

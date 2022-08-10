@@ -18,7 +18,7 @@ export default function Editar() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [idTipoUsuario, setIdTipo] = useState(0);
-    const [status, setStatus] = useState(true);
+    const [status, setStatus] = useState(false);
     const [listatipos, setListaTipos] = useState([]);
     const [listaResposta, setListaResposta] = useState([]);
 
@@ -42,33 +42,6 @@ export default function Editar() {
                 }
                 )
 
-                 
-                info.map((item) => {
-                    setNome(item.nome)
-                    // console.log(nome)
-                    return(nome)
-                 })
-                 info.map((item) => {
-                    setEmail(item.email)
-                    // console.log(email)
-                    return(email)
-                 })
-                 info.map((item) => {
-                    setSenha(item.senha)
-                    //console.log(senha)
-                    return(senha)
-                 })
-                 info.map((item) => {
-                    setIdTipo(item.idTipoUsuario)
-                    // console.log(idTipoUsuario)
-                    return(idTipoUsuario)
-                 })
-                 info.map((item) => {
-                    setStatus(item.status)
-                    // console.log(status)
-                    return(status)
-                 })
-
             }
 
         }).catch(erro => console.log(erro))
@@ -81,53 +54,22 @@ export default function Editar() {
             nome: nome,
             email: email,
             senha: senha,
-            idTipoUsuario: idTipoUsuario,
             status: status,
         }
 
-        api.get('/Usuarios/minhas', {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
-            }
-        }
-        )
-            .then(resposta => {
-                if (resposta.status === 200) {
-                    console.log(resposta.data)
-                    
-                    setNome(resposta.data.nome)
-                    setEmail(resposta.data.email)
-                    setSenha(resposta.data.senha)
-                    setIdTipo(resposta.data.idTipoUsuarioNavigation)
-                    setStatus(resposta.data.status)
-                    
-                    console.log(idUsuario)
-                    api.put('/Usuarios/' + idUsuario, user_atualizado, {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
-                        }
-                    }).then((resposta) => {
-                        if (resposta.status === 204) {
-                            console.log(resposta)
-                            navigate('/Geral')
-                        }
-                    }).catch(erro => console.log(erro))
-                }
-            }).catch(erro => console.log(erro))
+        // console.log(status)
 
-    }
-
-    function ListarTipos() {
-        api.get('/TiposUsuario', {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
-            }
-        }).then((resposta) => {
-            if (resposta.status === 200) {
-                //console.log(resposta)
-                setListaTipos(resposta.data)
-            }
-        }).catch(erro => console.log(erro))
+        api.put('/Usuarios/' + idUsuario, user_atualizado, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+                    }
+                }).then((resposta) => {
+                    if (resposta.status === 204) {
+                        console.log(resposta)
+                        console.log('editou')
+                        navigate('/Geral')
+                    }
+                }).catch(erro => console.log(erro))
     }
 
     function Logout(event) {
@@ -142,10 +84,7 @@ export default function Editar() {
         navigate('/Geral')
     }
 
-
-
     useEffect(BuscarID);
-    useEffect(ListarTipos);
 
 
     return (
@@ -165,59 +104,42 @@ export default function Editar() {
 
                 </nav>
             </section>
-            <section className="epc-geral">
+            <section className="epc-geral-editar">
                 <div className="titulo-info">
                     <h2>Minhas Informações</h2>
                 </div>
-                <div className="lados">
-                    <div className="lado1-info">
-                        
+                <form className="lados-editar">
+                    <div >
+
                         <div>
                             <h3 className="h3-geral">Nome</h3>
-                            <input type="text" className="lgn-input" 
-                                name='nome'    onChange={(e) => setNome(e.target.value)}/>
+                            <input type="text" className="lgn-input"
+                                name='nome' onChange={(e) => setNome(e.target.value)} />
                         </div>
-                        <div>
-                            <h3 className="h3-geral">Tipo</h3>
-                            {/* <input className="lgn-input" value={ idTipoUsuario} onChange={ idTipoUsuario => setIdTipo( idTipoUsuario) }/> */}
-                            <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  >
-                                <option value="0" selected disable> Selecione o Tipo de Usuario</option>
-                                {
-                                    listatipos.map((idTipoUsuario) => {
-                                        return (
-                                            <option key={idTipoUsuario.idTipoUsuario} >
-                                                {idTipoUsuario.titulo}
-                                            </option>
-                                        )
-                                    })
-                                }
-                            </select>
-                        </div>
-                        <div>
-                            <h3 className="h3-geral">Status</h3>
-                            <div className='container_inputs'>
-                                <div className='box_atividade'>
-                                    <label className='nome_input'>Ativo:</label>
-                                    <input type="checkbox"  name='status'  className='atividade'
-                                         onChange={(e) => setStatus(e.target.value)} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="lado1-info">
+
                         <div>
                             <h3 className="h3-geral">Email</h3>
                             <input className="lgn-input" type="email"
-                                name='email'         onChange={(e) => setEmail(e.target.value)} />
+                                name='email' onChange={(e) => setEmail(e.target.value)} />
                         </div>
+                    </div>
+                    <div >
                         <div>
                             <h3 className="h3-geral">Senha</h3>
-                            <input type="password" className="lgn-input" 
-                                  name='senha'   onChange={(e) => setSenha(e.target.value)}/>
+                            <input type="password" className="lgn-input"
+                                name='senha' onChange={(e) => setSenha(e.target.value)} />
                         </div>
-                        <button className="lgn_btn" onClick={Editar}>Editar</button>
+                        <div>
+                            <h3 className="h3-geral">Status</h3>
+                            <div className='box_atividade'>
+                                <label className='nome_input'>Ativo:</label>
+                                <input type="checkbox"  name='status'
+                                    onChange={(e) => setStatus(e.target.checked)} />
+                            </div>
+                        </div>
+                        <button className="lgn_btn btn-editar" type="submit" onClick={Editar}>Editar</button>
                     </div>
-                </div>
+                </form>
                 <button className="lgn_btn-cancel" onClick={Cancelar}>Cancelar</button>
             </section>
         </div>
