@@ -7,19 +7,21 @@ import api from '../services/api';
 import '../assets/css/geral.css';
 import '../assets/css/geral.css';
 import '../assets/css/login.css';
+import { parseJwt } from "../services/auth";
 import Header from "../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function Root() {
+export default function Usuarios() {
     const [listaUsuarios, setListaUsuarios] = useState([]);
-    const [nome, setNome] = useState([]);
-    const [email, setEmail] = useState([]);
-    const [senha, setSenha] = useState([]);
-    const [idTipoUsuario, setIdTipo] = useState([]);
-    const [status, setStatus] = useState([]);
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [idTipoUsuario, setIdTipo] = useState(0);
+    const [status, setStatus] = useState(false);
     const [listaTipos, setListaTipos] = useState([]);
     const [idUsuario, setIdUsuario] = useState(0);
+    const [root, setRoot] = useState(false);
 
     let navigate = useNavigate();
 
@@ -34,8 +36,31 @@ export default function Root() {
         setIdUsuario(id);
         handleOpen();
     }
+
     function fecharModal() {
         handleClose();
+    }
+
+    function direcionarRota() {
+
+        let base64 = localStorage.getItem('usuario-login').split('.')[1]
+        //console.log(base64);
+
+        switch (parseJwt().role) {
+
+            //Caso Admin
+            case '2':
+                setRoot(false);
+                break;
+
+            //Caso Root
+            case '3':
+                setRoot(true);
+                break;
+
+            default:
+                break;
+        }
     }
 
     function ListarTipos() {
@@ -57,40 +82,17 @@ export default function Root() {
         }).then(resposta => {
             if (resposta.status === 200) {
                 setListaUsuarios(resposta.data)
-                console.log(listaUsuarios)
+                //console.log(listaUsuarios)
 
-                listaUsuarios.map((item) => {
-                    setNome(item.nome)
-                    // console.log(nome)
-                    return (nome)
-                })
-                listaUsuarios.map((item) => {
-                    setEmail(item.email)
-                    // console.log(email)
-                    return (email)
-                })
-                listaUsuarios.map((item) => {
-                    setSenha(item.senha)
-                    //console.log(senha)
-                    return (senha)
-                })
-                listaUsuarios.map((item) => {
-                    setIdTipo(item.idTipoUsuario)
-                    // console.log(idTipoUsuario)
-                    return (idTipoUsuario)
-                })
-                listaUsuarios.map((item) => {
-                    setStatus(item.status)
-                    // console.log(status)
-                    return (status)
-                })
+                
             };
         })
     }
 
 
-    function EditarUser(event, idUsuario) {
-        event.preventDefault();
+    function EditarUser() {
+
+        console.log('editar')
 
         let user = {
             nome: nome,
@@ -100,9 +102,9 @@ export default function Root() {
             status: status,
         }
 
-        console.log('vamos editar')
+        console.log(status)
+        // console.log(user)
 
-        console.log(idUsuario)
         api.put('/Usuarios/' + idUsuario, user, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
@@ -116,6 +118,22 @@ export default function Root() {
 
     }
 
+    const ExcluirUsuario = (id) => {
+        api.delete(`/Usuarios/${id}`, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then(resposta => {
+                if (resposta.status === 204) {
+                    //console.log(resposta)
+                }
+            })
+            .catch(ex => {
+                console.log(ex)
+            })
+    }
+
 
 
 
@@ -124,8 +142,8 @@ export default function Root() {
     }
 
     useEffect(ListarUsuarios);
-    useEffect(ListarTipos, []);
-
+    useEffect(direcionarRota, []);
+    useEffect(ListarTipos, [])
 
 
     return (
@@ -146,13 +164,13 @@ export default function Root() {
                                 <h2 >Editar Usuário</h2>
                                 <form>
                                     <input className="lgn-input" type="text" name="nome" onChange={(e) => setNome(e.target.value)} placeholder="Nome" />
-                                    <select className="lgn-input" onChange={(e) => setIdTipo(e.target.value)} name='idTipoUsuario'  >
+                                    <select className="lgn-input" name="idTipoUsuario" onChange={(e) => setIdTipo(e.target.value)} >
                                         <option value="0" selected disable> Selecione o Tipo de Usuario</option>
                                         {
-                                            listaTipos.map((idtipo) => {
+                                            listaTipos.map((idTipoUsuario) => {
                                                 return (
-                                                    <option key={idtipo.idTipoUsuario} value={idtipo.idTipoUsuario}>
-                                                        {idtipo.titulo}
+                                                    <option key={idTipoUsuario.idTipoUsuario} value={idTipoUsuario.idTipoUsuario}>
+                                                        {idTipoUsuario.titulo}
                                                     </option>
                                                 )
                                             })
@@ -163,24 +181,26 @@ export default function Root() {
                                     <div className='container_inputs'>
                                         <div >
                                             <label className='nome_input'>Ativo:</label>
-                                            <input type="checkbox" name='status' className='atividade'
-                                                onChange={(e) => setStatus(e.target.value)} />
+                                            <input type="checkbox"  name='status'
+                                            onChange={(e) => setStatus(e.target.checked)} />
                                         </div>
                                     </div>
+
+                                    <button
+                                        className="lgn_btn"
+                                        type="submit"
+                                        onClick={() => EditarUser()}
+                                    >
+                                        Salvar
+                                    </button>
+                                    <button
+                                        className="lgn_btn-cancel-modal"
+                                        onClick={() => fecharModal()}
+                                    >
+                                        Cancelar
+                                    </button>
                                 </form>
 
-                                <button
-                                    className="lgn_btn"
-                                    onClick={() => EditarUser(idUsuario)}
-                                >
-                                    Salvar
-                                </button>
-                                <button
-                                    className="lgn_btn-cancel-modal"
-                                    onClick={() => fecharModal()}
-                                >
-                                    Cancelar
-                                </button>
                             </div>
 
 
@@ -198,9 +218,9 @@ export default function Root() {
                     <table className="tabela-lista">
                         <thead>
                             <tr>
-                                <th  className="tit">Nome</th>
-                                <th  className="tit">Tipo</th>
-                                <th  className="tit">Email</th>
+                                <th className="tit">Nome</th>
+                                <th className="tit">Tipo</th>
+                                <th className="tit">Email</th>
                                 <th className="tit">Senha</th>
                                 <th className="tit">Status</th>
                             </tr>
@@ -209,15 +229,18 @@ export default function Root() {
                             {
                                 listaUsuarios.map((item) => {
                                     return (
-                                       
+
                                         <tr key={item.idUsuario}>
                                             <td>{item.nome}</td>
-                                            <td>{item.idTipoUsuario}</td>
+                                            <td>{item.idTipoUsuarioNavigation.titulo}</td>
                                             <td>{item.email}</td>
                                             <td>{item.senha}</td>
                                             <td>{item.status ? 'Ativo' : 'Inativo'}</td>
 
                                             <td><button className="lgn_btn-cancel-root" onClick={() => abrirModal(item.idUsuario)} ><FontAwesomeIcon icon={faPen} fontSize={12} /></button></td>
+                                            {root ? <td><button onClick={(id) => ExcluirUsuario(item.idUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
+                                                :
+                                                <></>}
                                         </tr>
 
                                     )

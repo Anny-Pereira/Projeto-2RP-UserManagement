@@ -1,5 +1,7 @@
 # <p align="center"> 🖥 User Management 2RPnet 🌏</p>
 ## <p align="center">Processo Seletivo</p>
+<p align="center"> 📌 Objetivo: desenvolver um sistema que possibilite o cadastro e login de usuários</p>
+
 ### <p align="center">👩🏻‍💻 Desesnvolvido por</p>
 <table align="center">
   <tr>

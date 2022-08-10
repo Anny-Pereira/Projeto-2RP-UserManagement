@@ -7548,11 +7548,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\elilt\\OneDrive\\Área de Trabalho\\Processo-2RP\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\Projeto-2RP-UserManagement\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
       "projectName": "2RP_UserManagement_WebApi",
-      "projectPath": "C:\\Users\\elilt\\OneDrive\\Área de Trabalho\\Processo-2RP\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
+      "projectPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\Projeto-2RP-UserManagement\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
       "packagesPath": "C:\\Users\\elilt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elilt\\OneDrive\\Área de Trabalho\\Processo-2RP\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\obj\\",
+      "outputPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\Projeto-2RP-UserManagement\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\elilt\\AppData\\Roaming\\NuGet\\NuGet.Config",

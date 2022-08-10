@@ -7,8 +7,7 @@ import {BrowserRouter as Router,Routes, Route} from 'react-router-dom';
 
 import Login from './pages/Login';
 import Geral from './pages/Geral';
-import Admin from './pages/Admin';
-import Root from './pages/Root';
+import Usuarios from './pages/Usuarios';
 import Tipos from './pages/TipoUsuarios';
 import Editar from './pages/EditarUsuario';
 import Cadastro from './pages/CadastroUsuario';
@@ -20,8 +19,7 @@ const routing = (
       <Routes>
         <Route exact path="/" element={<Login/>} />
         <Route path="/Geral" element={<Geral/> } />
-        <Route path="/Admin" element={<Admin/> } />
-        <Route path="/Root" element={<Root/> } />
+        <Route path="/Usuarios" element={<Usuarios/> } />
         <Route path="/Tipos" element={<Tipos/> } />
         <Route path="/Editar" element={<Editar/> } />
         <Route path="/Cadastro" element={<Cadastro/> } />

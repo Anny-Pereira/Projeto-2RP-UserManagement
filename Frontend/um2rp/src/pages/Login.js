@@ -37,7 +37,7 @@ export default function Login() {
                     setIsLoading(false)
 
                     let base64 = localStorage.getItem('usuario-login').split('.')[1]
-                    console.log(base64);
+                    //console.log(base64);
 
                     switch (parseJwt().role) {
                         //Caso Geral
@@ -47,12 +47,12 @@ export default function Login() {
 
                         //Caso Admin
                         case '2':
-                            navigate('/Admin')
+                            navigate('/Usuarios')
                             break;
 
                         //Caso Root
                         case '3':
-                            navigate('/Root')
+                            navigate('/Usuarios')
                             break;
 
                         default:

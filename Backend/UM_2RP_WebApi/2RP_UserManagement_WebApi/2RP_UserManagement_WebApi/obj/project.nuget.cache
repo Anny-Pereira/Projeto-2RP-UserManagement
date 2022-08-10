@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BGBPrBqaN+sD9TIasY3sjcU3nBf3xUIJ2/JbXlu/qIccIPfhiGiz5a3hrxMDHjrNLFX6OLg3OE+CkS9cynGTwA==",
+  "dgSpecHash": "2ph+g+CmKGYOQLqxHZv0UWjRzTl0AjZSPhzaCnBPL81CwqrlVMj2hkhoNuOOgCrxNGT9GD+c8gxO4aWO4NIJyA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elilt\\OneDrive\\Área de Trabalho\\Processo-2RP\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
+  "projectFilePath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\Projeto-2RP-UserManagement\\Backend\\UM_2RP_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi\\2RP_UserManagement_WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elilt\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\elilt\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.15\\microsoft.aspnetcore.authentication.jwtbearer.5.0.15.nupkg.sha512",

@@ -13,7 +13,7 @@ export default function Cadastro() {
     const [listatipos, setListaTipos] = useState([])
     const [nome, setNome] = useState('')
     const [senha, setSenha] = useState('')
-    const [status, setStatus] = useState(true)
+    const [status, setStatus] = useState(false)
     const [email, setEmail] = useState('')
     const [idTipo, setIdTipo] = useState('')
 
@@ -33,11 +33,14 @@ export default function Cadastro() {
     }
 
     function Voltar(){
-        navigate('/Root')
+        navigate('/Usuarios')
     }
 
     const Cadastrar = (event) => {
         event.preventDefault();
+
+        //console.log(status)
+
         let Usuario = {
             nome: nome,
             email: email,
@@ -53,7 +56,7 @@ export default function Cadastro() {
         }).then((resposta) => {
             if (resposta.status === 201) {
                 console.log(resposta)
-                navigate('/Root')
+                navigate('/Usuarios')
             }
         }).catch(erro => console.log(erro))
     }
@@ -85,8 +88,8 @@ export default function Cadastro() {
                         <div className='container_inputs'>
                             <div className='box_atividade'>
                                 <label className='nome_input'>Ativo:</label>
-                                <input type="checkbox"  name='status' className='atividade' id="Status"
-                                    value={status} onChange={(e) => setStatus(e.target.value)} />
+                                <input type="checkbox" value={status} name='status'
+                                    onChange={(e) => setStatus(e.target.checked)} />
                             </div>
                         </div>
                         <span className="Mensagem_erro"></span>

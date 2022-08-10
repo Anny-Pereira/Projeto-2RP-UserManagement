@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 
 
@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus} from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlus, faTrash} from '@fortawesome/free-solid-svg-icons'
 
 export default function TiposUsuario() {
     const [listaTipos, setListaTipos] = useState([]);
@@ -27,19 +27,26 @@ export default function TiposUsuario() {
                 //console.log(resposta.data)
                 setListaTipos(resposta.data)
 
-                listaTipos.map((item) => {
-                    setIdTipo(item.idTipoUsuario)
-                    // console.log(idTipoUsuario)
-                    return (idTipoUsuario)
-                })
-
-                listaTipos.map((item) => {
-                    setTitulo(item.titulo)
-                    console.log(titulo)
-                    return (titulo)
-                })
-
             };
+        }).catch(erro => console.log(erro))
+    }
+
+    const Cadastrar = (event) => {
+        event.preventDefault();
+        
+        let Tipo = {
+            titulo: titulo
+        }
+     
+        api.post('/TiposUsuario', Tipo , {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+            }
+        }).then((resposta) => {
+            if (resposta.status === 201) {
+                console.log(resposta)
+                fecharModal()
+            }
         }).catch(erro => console.log(erro))
     }
 
@@ -56,6 +63,22 @@ export default function TiposUsuario() {
         handleClose();
     }
 
+
+    const ExcluirTipo = (id) => {
+        api.delete(`/TiposUsuario/${id}`, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then(resposta => {
+                if (resposta.status === 204) {
+                    console.log(resposta)
+                }
+            })
+            .catch(ex => {
+                console.log(ex)
+            })
+    }
 
 
     useEffect(ListarTipos);
@@ -81,14 +104,15 @@ export default function TiposUsuario() {
 
                                     <div className="space-modal-descricao">
                                         <h2 >Cadastrar Tipo</h2>
-                                        <form>
+                                        <form >
                                             <input className="lgn-input" type="text" name="titulo" onChange={(e) => setTitulo(e.target.value)} placeholder="Titulo" />
 
                                         </form>
 
                                         <button
                                             className="lgn_btn"
-                                            onClick={() => fecharModal()}
+                                            type='submit'
+                                            onClick={(event) => Cadastrar(event)}
                                         >
                                             Cadastrar
                                         </button>
@@ -126,6 +150,7 @@ export default function TiposUsuario() {
                                             <td>{item.idTipoUsuario}</td>
                                             <td>{item.titulo}</td>
 
+                                            <td><button onClick={(id) => ExcluirTipo(item.idTipoUsuario)} className="lgn_btn-cancel-root" ><FontAwesomeIcon icon={faTrash} fontSize={12} /></button></td>
 
                                         </tr>
 
