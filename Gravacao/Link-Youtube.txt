@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+Link da Gravação do Funcionamento da Aplicação
+>>>>>>> develop
 =======
 Link da Gravação do Funcionamento da Aplicação
 >>>>>>> develop
